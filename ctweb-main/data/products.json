@@ -1,0 +1,376 @@
+{
+ "categories": [
+  {
+   "k": "cardio",
+   "div": "med",
+   "name": "Cardiovascular & vascular"
+  },
+  {
+   "k": "gastro",
+   "div": "med",
+   "name": "Gastroenterology"
+  },
+  {
+   "k": "diab",
+   "div": "med",
+   "name": "Diabetes"
+  },
+  {
+   "k": "resp",
+   "div": "med",
+   "name": "Respiratory"
+  },
+  {
+   "k": "pain",
+   "div": "med",
+   "name": "Pain & inflammation"
+  },
+  {
+   "k": "neuro",
+   "div": "med",
+   "name": "Neurology"
+  },
+  {
+   "k": "derma",
+   "div": "med",
+   "name": "Dermatology & topical"
+  },
+  {
+   "k": "mens",
+   "div": "med",
+   "name": "Men's health"
+  },
+  {
+   "k": "antiviral",
+   "div": "med",
+   "name": "Antiviral"
+  },
+  {
+   "k": "endo",
+   "div": "med",
+   "name": "Endocrine"
+  },
+  {
+   "k": "bone",
+   "div": "ff",
+   "name": "Bone & mineral"
+  },
+  {
+   "k": "blood",
+   "div": "ff",
+   "name": "Blood & maternal health"
+  }
+ ],
+ "products": [
+  {
+   "id": "amebismo",
+   "n": "AmeBismo",
+   "cat": "gastro",
+   "img": "/uploads/amebismo.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy"
+   ],
+   "form": "Oral suspension sachets",
+   "ind": "Bismuth subsalicylate 262.5 mg — GI protection",
+   "flag": null
+  },
+  {
+   "id": "biltasis",
+   "n": "Biltasis 10mg",
+   "cat": "cardio",
+   "img": "/uploads/biltasis.jpg",
+   "b": [],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Film-coated tablet",
+   "ind": "Dyslipidemia — rosuvastatin 10 mg",
+   "flag": null
+  },
+  {
+   "id": "calcimax",
+   "n": "CalciMAX",
+   "cat": "bone",
+   "img": "/uploads/calcimax.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy",
+    "Modern trade"
+   ],
+   "form": "Oral solution 10 ml",
+   "ind": "Calcium supplementation",
+   "flag": null
+  },
+  {
+   "id": "catavastatin10",
+   "n": "Catavastatin 10mg",
+   "cat": "cardio",
+   "img": "/uploads/catavastatin10.jpg",
+   "b": [],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Film-coated tablet",
+   "ind": "Dyslipidemia — rosuvastatin 10 mg",
+   "flag": null
+  },
+  {
+   "id": "catavastatin20",
+   "n": "Catavastatin 20mg",
+   "cat": "cardio",
+   "img": "/uploads/catavastatin20.jpg",
+   "b": [
+    "bs"
+   ],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Film-coated tablet",
+   "ind": "Dyslipidemia — rosuvastatin 20 mg",
+   "flag": "Category best-seller — edit this proof line in the admin."
+  },
+  {
+   "id": "demakgon",
+   "n": "Demakgon 1%",
+   "cat": "derma",
+   "img": "/uploads/demakgon.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy"
+   ],
+   "form": "Topical cream 15 g",
+   "ind": "Topical treatment used in gynecology",
+   "flag": null
+  },
+  {
+   "id": "sucragas",
+   "n": "CT-Sucragas Gel",
+   "cat": "gastro",
+   "img": "/uploads/sucragas.jpg",
+   "b": [
+    "bs"
+   ],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Oral gel sachets",
+   "ind": "Sucralfate 2000 mg — mucosal protection",
+   "flag": "Category best-seller — edit this proof line in the admin."
+  },
+  {
+   "id": "densil",
+   "n": "Densil 600",
+   "cat": "cardio",
+   "img": "/uploads/densil.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy"
+   ],
+   "form": "Film-coated tablet",
+   "ind": "Diosmin 600 mg — venous insufficiency",
+   "flag": null
+  },
+  {
+   "id": "enaxen",
+   "n": "Enaxen 500/20",
+   "cat": "pain",
+   "img": "/uploads/enaxen.jpg",
+   "b": [],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Enteric-coated tablet",
+   "ind": "Naproxen + esomeprazole — pain with GI protection",
+   "flag": null
+  },
+  {
+   "id": "empatine",
+   "n": "Empatine",
+   "cat": "diab",
+   "img": "/uploads/empatine.jpg",
+   "b": [
+    "bs"
+   ],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Film-coated tablet",
+   "ind": "Empagliflozin 10 mg + linagliptin 5 mg — type 2 diabetes",
+   "flag": "Category best-seller — edit this proof line in the admin."
+  },
+  {
+   "id": "granucine",
+   "n": "Granucine",
+   "cat": "resp",
+   "img": "/uploads/granucine.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy"
+   ],
+   "form": "Oral granules, 30 sachets",
+   "ind": "Prescription medicine — details in admin",
+   "flag": null
+  },
+  {
+   "id": "lubicid",
+   "n": "Lubicid Suspension",
+   "cat": "gastro",
+   "img": "/uploads/lubicid.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy"
+   ],
+   "form": "Oral suspension",
+   "ind": "Bismuth subsalicylate 525 mg",
+   "flag": null
+  },
+  {
+   "id": "myhemo",
+   "n": "Myhemo",
+   "cat": "blood",
+   "img": "/uploads/myhemo.jpg",
+   "b": [
+    "bs"
+   ],
+   "ch": [
+    "Pharmacy",
+    "Modern trade"
+   ],
+   "form": "Oral granules",
+   "ind": "Ferrous fumarate 305 mg + folic acid — iron support",
+   "flag": "Category best-seller — edit this proof line in the admin."
+  },
+  {
+   "id": "nasomom",
+   "n": "Nasomom 4 TD",
+   "cat": "resp",
+   "img": "/uploads/nasomom.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy"
+   ],
+   "form": "Nasal spray",
+   "ind": "Herbal nasal relief",
+   "flag": null
+  },
+  {
+   "id": "simegazforte",
+   "n": "Simegaz Forte 800",
+   "cat": "gastro",
+   "img": "/uploads/simegazforte.jpg",
+   "b": [
+    "bs"
+   ],
+   "ch": [
+    "Pharmacy",
+    "Modern trade"
+   ],
+   "form": "Oral suspension sachets",
+   "ind": "Antacid & antiflatulent",
+   "flag": "Category best-seller — edit this proof line in the admin."
+  },
+  {
+   "id": "simegazplus",
+   "n": "Simegaz Plus",
+   "cat": "gastro",
+   "img": "/uploads/simegazplus.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy",
+    "Modern trade"
+   ],
+   "form": "Oral suspension sachets",
+   "ind": "Antacid & antiflatulent — peppermint flavor",
+   "flag": null
+  },
+  {
+   "id": "solpirac",
+   "n": "Solpirac 1200",
+   "cat": "neuro",
+   "img": "/uploads/solpirac.jpg",
+   "b": [],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Oral granules",
+   "ind": "Piracetam 1200 mg",
+   "flag": null
+  },
+  {
+   "id": "tadachem",
+   "n": "Tadachem-20",
+   "cat": "mens",
+   "img": "/uploads/tadachem.jpg",
+   "b": [],
+   "ch": [
+    "Pharmacy"
+   ],
+   "form": "Tablet, 2 x 2",
+   "ind": "Tadalafil 20 mg",
+   "flag": null
+  },
+  {
+   "id": "tenofovir",
+   "n": "Tenofovir Alafenamide 25",
+   "cat": "antiviral",
+   "img": "/uploads/tenofovir.jpg",
+   "b": [],
+   "ch": [
+    "Hospital"
+   ],
+   "form": "Film-coated tablet",
+   "ind": "Tenofovir alafenamide 25 mg",
+   "flag": null
+  },
+  {
+   "id": "tesorid",
+   "n": "Tesorid 50",
+   "cat": "gastro",
+   "img": "/uploads/tesorid.jpg",
+   "b": [],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Film-coated tablet",
+   "ind": "Itopride HCl 50 mg — GI motility",
+   "flag": null
+  },
+  {
+   "id": "valgesic10",
+   "n": "Valgesic 10",
+   "cat": "endo",
+   "img": "/uploads/valgesic10.jpg",
+   "b": [],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Tablet",
+   "ind": "Hydrocortisone 10 mg",
+   "flag": null
+  },
+  {
+   "id": "valgesic20",
+   "n": "Valgesic 20",
+   "cat": "endo",
+   "img": "/uploads/valgesic20.jpg",
+   "b": [],
+   "ch": [
+    "Hospital",
+    "Pharmacy"
+   ],
+   "form": "Tablet",
+   "ind": "Hydrocortisone 20 mg",
+   "flag": null
+  }
+ ]
+}
