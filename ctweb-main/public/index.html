@@ -957,13 +957,32 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
 
 }
 
+
+/* i18n audit fixes: prevent nav pill wrap; burger below 1200px (long labels in both languages) */
+#pg-home nav.main .btn, #pg-port nav.main .btn{white-space:nowrap}
+@media (max-width:1199px){
+  #pg-home nav.main, #pg-port nav.main{display:none}
+  #pg-home .burger, #pg-port .burger{display:block}
+}
+
+/* prominent language toggle in topbar */
+#pg-home .topbar .wrap, #pg-port .topbar .wrap{align-items:center}
+#pg-home .tb-right, #pg-port .tb-right{display:flex;align-items:center;gap:1.1rem;flex-shrink:0}
+#pg-home .lang-pill, #pg-port .lang-pill{display:inline-flex;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:2px;gap:2px}
+#pg-home .lang-pill a, #pg-port .lang-pill a{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;padding:.16rem .6rem;border-radius:999px;color:#DDE2F7;text-decoration:none;line-height:1.4;transition:color .15s,background .15s}
+#pg-home .lang-pill a:hover, #pg-port .lang-pill a:hover{color:#fff}
+#pg-home .lang-pill a[aria-current], #pg-port .lang-pill a[aria-current]{background:#fff;color:var(--teal);font-weight:700}
+@media (max-width:560px){
+  #pg-home .topbar .mono:first-child, #pg-port .topbar .mono:first-child{display:none}
+  #pg-home .topbar .wrap, #pg-port .topbar .wrap{justify-content:flex-end}
+}
 </style>
 </head>
 <body>
 <div id="pg-home">
 
 
-<div class="topbar"><div class="wrap"><span class="mono">Công ty TNHH Dược phẩm và Trang thiết bị Y tế CT Pharma</span><span class="mono">+84 (28) 22 660 2727</span></div></div>
+<div class="topbar"><div class="wrap"><span class="mono">Công ty TNHH Dược phẩm và Trang thiết bị Y tế CT Pharma</span><span class="tb-right"><span class="mono">+84 (28) 22 660 2727</span><span class="lang-pill" role="group" aria-label="Language / Ngôn ngữ"><a href="#" data-lang="en">EN</a><a href="#" data-lang="vi">VI</a></span></span></div></div>
 <header class="nav">
   <div class="wrap">
     <a class="logo" href="#/"><svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="12" width="28" height="8" rx="4" fill="#FDFDFE" stroke="#C9CFE2" stroke-width=".6"/><path d="M16 12H6a4 4 0 0 0-4 4 4 4 0 0 0 4 4h10z" fill="#2461AC"/><rect x="12" y="2" width="8" height="28" rx="4" fill="#FDFDFE" stroke="#C9CFE2" stroke-width=".6"/><path d="M12 16V6a4 4 0 0 1 8 0v10z" fill="#E8232B"/></svg><span class="lw">CT<span>&thinsp;Pharma</span></span></a>
@@ -973,8 +992,8 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
       <a class="top" href="#/portfolio">Portfolio</a>
       <a class="top" href="#how">How We Work</a>
       <a class="top" href="#partner">Partnership</a>
-      <span class="langs"><a href="#" aria-current="page">EN</a><a href="#">VI</a><a href="#">KO</a></span>
-      <a class="btn btn-solid" href="#contact">Discuss Vietnam Market Entry</a>
+      <span class="langs"><a href="#" data-lang="en" aria-current="page">EN</a><a href="#" data-lang="vi">VI</a></span>
+      <a class="btn btn-solid" href="#contact" data-vi="Trao đổi hợp tác">Discuss Vietnam Market Entry</a>
     </nav>
     <button class="burger" id="burger" aria-expanded="false" aria-controls="mmenu">MENU</button>
   </div>
@@ -985,7 +1004,7 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
     <a href="#how">How We Work</a>
     <a href="#partner">Partnership</a>
     <a href="#contact">Contact</a>
-    <div class="m-langs"><a href="#" aria-current="page">EN</a><a href="#">VI</a><a href="#">KO</a></div>
+    <div class="m-langs"><a href="#" data-lang="en" aria-current="page">EN</a><a href="#" data-lang="vi">VI</a></div>
   </div>
 </header>
 
@@ -1117,7 +1136,6 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
         <div class="plogo"><span class="plogo-img"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALcAAAA5CAYAAAB01Lo3AAAJPklEQVR42u1dTXbiOBD+Oi/78SxmNYt2ToA5Qcx6FklOgDkB5gSYE0BOgDlByAlwThByApQTtPsEPYuUHtUaSf7BBuNRvccjAWPL0qdS1VdV8re//v4HLYoPIAQwoL99AB69A8AQwB5OnLQgty2cMwTwAOCRgdgknhsCJ10HtwdgCiB2gHXSF3D7AOYAIteVTvoCbqmpE9eFTvoE7hDAuoQ97cTJReWm4vFLADsHbCd90tw+gBcAgesyJ30Ct++0tZM+miUO2E56qblPAXYOQNC7f8Lk8OgcTpw0prm9E4C9AXCHr9D6iP4eEdjL2vdLAD/o9Yv+d+KkEXDPT9C2B422zQjki4LfTun3aqQzcJFPJ02YJRGBq64kdA6dtk7Y5NFNqETz+QzA6sL9FNY0yZoQ28TOKqyGNmWVVUiC8wF8V+73J51jX/K+PQvztq/Yd6b+yb8pWYFNOpACwDOOGYEL1okr0tIj+swE7AmAtANK4FdNvyMD8Ervoua1d4bJJWg1PJXtWhREmmMA4wo08J7u2XbOCF+BQJ2MKkxaaSno7i27bdAcMdnOUvtmSofdsxtNDJ3eBWDjBGf4kV4AsKXJnp25HTZgpxYQ+qgX2wjolXTJLPFLJkDlNDsFG0Tf0gk5DazO3PANzmJaonM8xqZcA6MigZ7SvZ+jzUsLsAW1wwTs92v3c24UrV2WCRmRyTAB8ETMyB1pJqEB4dpg5z1oOlBYHM9QYVIO9P5+RZmJEbXXb/k6U4vvlNMY5hZt7/WFLSmjtbd0TG7RBDF12rMh2WpJ73IivRnMEWGwG3eGnPFAOW/Xpe3gWFDghE8sPkDUl6DdTQU2YIHyjmRMGj3XsDA+rQDQmCtCY2dPSdOFyuBkBqYmPGP/vdFkHrHVbGZYwXQAX7c0cV4KxnFboPFtYzsC8CeAb/S6o7HenOA0t2pzj0scO6fB3Jd0irZ0LNdQsnN4Zwn2/UJjM+qW1gGdJ6G2ZwA+GA13LjlY+iKmCW1z0kM6rkmq88VyvW0JXyYoALbQfC7YhAm7YiLe0BIflnSIZMrrD+rEoiVMKLadzvF8M2jttcVmlNdNSHNMCCBpx7RHSve/L1AaTdm38wJwzkpofZN8lOzbrEvgDk+gudakvdYFXvmTAkz1e1VrL5l9r2rGZwJ0p5bAggn+ZPFVvIbAYKuMyiumQOjkj2u0uYOGGAAbyDPmZI4N4M6Y9okV+/qOlr0RfXdtyVRC42RzeWjAzl4V2NmiJM0LiwnlXxu4B2iW5toZNFFMy7NqBuX4imgJTUDHI/NHar8M1yurmiH2ssyLDdiriqkDsFCEEa4ot8SvELT5pM++s1wDEwvwXeMgzlg4OWNabcsq6VV5teQmBDQ5eUDng87dtYkg+zEw3I9fc4Mim8O6rxEp3FgoVZ9Rrm1FkIMaJnJlcOe0lK5KLFeRJiCTaGxpCbpAE8HUefk8t0Rq/GmBpnukzpfavks7Wn1YBi+o0dbIoklVX6fKCjMtWEnaBPmyabZE1zFDAmhekB0nveOhxrZLNFpgga+8Ep9da6wxVSSwPTrHgSZAaOn4vWa5DjqmvdFg7ooNCM81Hci8wqTwGakQXUs+t84BmVv48JCOTzQRykQBbkYgfGdAjTWefUrfv9M5PAOI1QFdVABAl8Dt1wC31xLFmBUwPDaQ+10Hd6ppfMJsbnUZGWsilEM2QaTGDZkd7bEB8JWUR1GwjcSzhbNdaVab/2Ohg3diOsJWGcOyID90JQ3ipqDxHgvegMyJhMAbMtru02AiyNxcj+WGzGny5BozZ0Kf7woKJiT1JUEuk7e29PshCwkD18HRihbOGZ+YjiBwDJKJigUrMTpaILw2sCGhobMGNAm2hgjliuUsJDiG8UPGokhGZlcQENqw68SW4yQL0yVefNCSPS4sfbYuWdSAgkhrWiKdQF3R9zVYq0XFibQ0rcy31ABf44WjRq6yoJtRGygBNmfHvzJbfWXJlMsZoDNc1olDA8GWJjV3ztiKg2GQpUmZoJl0giogn9cYs6zib+Y2cH9W1BAZ/UYojs2Apc5G1AmvjOJK6PsxvYaKrf5CgzVjkcxXxYb28Xs9YM4CDwLofJprUFCeVRXYPG9lYXGepw3n3XCQLy0+TXjJ7TluCazTgk4sw3dD4aMfldTLlAA+YDz1q5JxGCvHB/RdWILSk0GSzYk1i23J+MQCXdP9ckf6wWA2yoKREZpPDMsKqnbCghTbVh3KrETlTWKJBkWGoEykOCMRgX3CnMkV02ixsuf3gTmWgUHT7TWTas0c1y5p7aign5uQCezBtrglR3jTxadn3Bgy70DaOmLaOmLFrlXSLFMC+YxpkBlp8JyWtRnjpA8aXlsnnwY6cM/szC7UAXoFOdaiwVQBUVBUMm+pP0SXK3FeNY1NNHabr3EkfRxzTXwD17pmUccPfFGKn6RNpF3+Tu9lvWWhsVP3ivYKLkxJhSWipE1XsKws5ysT1NrVKDUbdBH4t8x24rM6U+zrgG72gT6/Z59B441LR49H0SLW+T/ppkMc9xMcsmsm7HhuW/JKd485VQGbMHuFGhufcZsBn5lHDyU4ZtFC26QS2VnyUTaW1SJk7d6S8tla/K2ix8bsLw1uSbdN2ZIPTb5xUDJXwxYajllVyL0lQJCWpPgkdbTSmCY4QyV7dMJSPmqpXRkB8hFm7ntYgiB4ZEUpeyUl1isR/U0vScXearLBwLbL8unGQrRTxDpqadl6YklbH+hudU6bS/bMAj6flEzSYioqKhSVt55bwp0ROWPfz1xN3qQkNMBxx9qVlairPJdzGbQ8uUSXEqdWzFZ+6UHC0apDnrwgE2x0xjatCpiYZUuZj5MObF76H3DnBVypk3q1k3Kf8vQCbVhU5L4XJ0y+lGz5FB3dwlhu2Dh12KxlOwrNfoqnyAb6nbnyCmbQpIKDndArIPDfs7RkdX9GeZ9vBYyKjkFZNEQdPpsKbtQtjNUnK7RdxTK68qJfJ7i+JyvkZ/DmnTi52NPMxJmdHydOzvqoPgdwJ71+PLY4Ey/rxMlFnv0ucNy6wYmTXoEbjCaaODPFSR/BDRy35X123eekb+Dme5PcobkqEidOOgFuDvKIgdyZK056A24dyEcO6E7Q0dwSNJDSmeH37QxCHEvRvL48LctJt+Vf6DqqUXMfFNcAAAAASUVORK5CYII=" alt="Diethelm (DKSH) logo"></span><span class="pc">Vietnam · Distribution</span></div>
       </div>
     </div>
-    <p class="pnote-line">Partner logos shown in a unified monochrome treatment — confirm current brand-guideline usage and permission with each partner before publication.</p>
   </div>
 </section>
 
@@ -1266,12 +1284,12 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
         <div class="c-block">
           <span class="mono">For brand owners</span>
           <h3>Market entry &amp; distribution</h3>
-          <p>Registration, import, distribution, and marketing for healthcare and functional food brands entering Vietnam. <a href="mailto:export@ctpharma.vn">export@ctpharma.vn</a></p>
+          <p>Registration, import, distribution, and marketing for healthcare and functional food brands entering Vietnam. <a href="mailto:admin01@duocphamct.com">admin01@duocphamct.com</a></p>
         </div>
         <div class="c-block">
           <span class="mono">For ODM / OEM factories</span>
           <h3>Long-term purchasing partnership</h3>
-          <p>Committed, high-volume purchasing for factories seeking a reliable Vietnam customer. <a href="mailto:sourcing@ctpharma.vn">sourcing@ctpharma.vn</a></p>
+          <p>Committed, high-volume purchasing for factories seeking a reliable Vietnam customer. <a href="mailto:admin01@duocphamct.com">admin01@duocphamct.com</a></p>
         </div>
         <div class="c-block">
           <span class="mono">Head office</span>
@@ -1308,7 +1326,7 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
 <div id="pg-port" style="display:none">
 
 
-<div class="topbar"><div class="wrap"><span class="mono">Công ty TNHH Dược phẩm và Trang thiết bị Y tế CT Pharma</span><span class="mono">+84 (28) 22 660 2727</span></div></div>
+<div class="topbar"><div class="wrap"><span class="mono">Công ty TNHH Dược phẩm và Trang thiết bị Y tế CT Pharma</span><span class="tb-right"><span class="mono">+84 (28) 22 660 2727</span><span class="lang-pill" role="group" aria-label="Language / Ngôn ngữ"><a href="#" data-lang="en">EN</a><a href="#" data-lang="vi">VI</a></span></span></div></div>
 <header class="nav">
   <div class="wrap">
     <a class="logo" href="#/"><svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="12" width="28" height="8" rx="4" fill="#FDFDFE" stroke="#C9CFE2" stroke-width=".6"/><path d="M16 12H6a4 4 0 0 0-4 4 4 4 0 0 0 4 4h10z" fill="#2461AC"/><rect x="12" y="2" width="8" height="28" rx="4" fill="#FDFDFE" stroke="#C9CFE2" stroke-width=".6"/><path d="M12 16V6a4 4 0 0 1 8 0v10z" fill="#E8232B"/></svg><span class="lw">CT<span>&thinsp;Pharma</span></span></a>
@@ -1318,8 +1336,8 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
       <a class="top on" href="#/portfolio" aria-current="page">Portfolio</a>
       <a class="top" href="#how">How We Work</a>
       <a class="top" href="#partner">Partnership</a>
-      <span class="langs"><a href="#" aria-current="page">EN</a><a href="#">VI</a><a href="#">KO</a></span>
-      <a class="btn btn-solid" href="#contact">Discuss Vietnam Market Entry</a>
+      <span class="langs"><a href="#" data-lang="en" aria-current="page">EN</a><a href="#" data-lang="vi">VI</a></span>
+      <a class="btn btn-solid" href="#contact" data-vi="Trao đổi hợp tác">Discuss Vietnam Market Entry</a>
     </nav>
     <button class="burger" id="p-burger" aria-expanded="false" aria-controls="p-mmenu">MENU</button>
   </div>
@@ -1330,7 +1348,7 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
     <a href="#how">How We Work</a>
     <a href="#partner">Partnership</a>
     <a href="#contact">Contact</a>
-    <div class="m-langs"><a href="#" aria-current="page">EN</a><a href="#">VI</a><a href="#">KO</a></div>
+    <div class="m-langs"><a href="#" data-lang="en" aria-current="page">EN</a><a href="#" data-lang="vi">VI</a></div>
   </div>
 </header>
 
@@ -1586,7 +1604,7 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
       ctx.save();
       ctx.fillStyle = '#8E97C2';
       ctx.font = (cell*0.72)+'px "IBM Plex Mono", monospace';
-      ctx.fillText(r.label, r.lx*cell, r.ly*rowH);
+      ctx.fillText((document.documentElement.lang==='vi' ? ({'FROM KOREA':'TỪ HÀN QUỐC','FROM EUROPE':'TỪ CHÂU ÂU'}[r.label]||r.label) : r.label), r.lx*cell, r.ly*rowH);
       ctx.restore();
     });
 
@@ -1937,5 +1955,84 @@ body{font-family:var(--sans);color:var(--body);background:var(--paper);font-size
   window.addEventListener('hashchange',route);route();
 })();
 </script>
+
+<!-- I18N:START -->
+<script>
+(function(){
+  var DICT = {"Distribution": "Phân phối", "Case Studies": "Nghiên cứu điển hình", "Portfolio": "Danh mục sản phẩm", "How We Work": "Cách chúng tôi làm việc", "Partnership": "Hợp tác", "Contact": "Liên hệ", "Discuss Vietnam Market Entry": "Trao đổi về gia nhập thị trường Việt Nam", "For European & Korean healthcare brands · ODM/OEM factories": "Dành cho các thương hiệu chăm sóc sức khỏe châu Âu & Hàn Quốc · nhà máy ODM/OEM", "We build healthcare brands into": "Chúng tôi xây dựng thương hiệu chăm sóc sức khỏe thành", "best-sellers": "sản phẩm bán chạy", "in Vietnam.": "tại Việt Nam.", "Full-service market entry for healthcare and functional food brands in Vietnam —": "Dịch vụ trọn gói đưa các thương hiệu dược phẩm và thực phẩm chức năng vào thị trường Việt Nam —", "registration, import, distribution, and marketing": "đăng ký, nhập khẩu, phân phối và tiếp thị", "under one roof.": "trong một đầu mối duy nhất.", "Submit a Product Proposal": "Gửi đề xuất sản phẩm", "Distribution coverage · HQ: Ho Chi Minh City": "Mạng lưới phân phối · Trụ sở: TP. Hồ Chí Minh", "Hospitals nationwide": "Bệnh viện trên toàn quốc", "Pharmacies in network": "Nhà thuốc trong mạng lưới", "Products in portfolio": "Sản phẩm trong danh mục", "Category best-sellers": "Nhóm hàng bán chạy nhất", "Every channel that sells healthcare in Vietnam": "Mọi kênh phân phối dược phẩm tại Việt Nam", "One agreement, four channels — we don't hand your product to sub-distributors we don't control.": "Một hợp đồng, bốn kênh — chúng tôi không giao sản phẩm của bạn cho các nhà phân phối trung gian ngoài tầm kiểm soát.", "Hospital": "Bệnh viện", "Formulary listings and tender-cycle relationships across public and private hospitals.": "Đưa vào danh mục thuốc và quan hệ đấu thầu tại các bệnh viện công và tư.", "200+ hospitals": "200+ bệnh viện", "Pharmacy": "Nhà thuốc", "Independent and chain pharmacy coverage nationwide, from major cities to provincial markets.": "Phủ khắp nhà thuốc độc lập và chuỗi trên toàn quốc, từ thành phố lớn đến thị trường tỉnh.", "5,000+ pharmacies": "5.000+ nhà thuốc", "Modern trade": "Kênh hiện đại", "Listings with major supermarket and convenience chains for functional food and OTC lines.": "Có mặt tại các chuỗi siêu thị và cửa hàng tiện lợi lớn cho dòng thực phẩm chức năng và OTC.", "Retail chain access": "Tiếp cận chuỗi bán lẻ", "Digital & telehealth": "Kỹ thuật số & khám từ xa", "E-commerce storefronts and telehealth partnerships for direct-to-consumer categories.": "Gian hàng thương mại điện tử và hợp tác khám từ xa cho các nhóm hàng bán trực tiếp đến người tiêu dùng.", "Growing channel": "Kênh đang tăng trưởng", "Case studies": "Nghiên cứu điển hình", "Brands we've built, not just carried": "Những thương hiệu chúng tôi gây dựng, không chỉ phân phối", "Functional food": "Thực phẩm chức năng", "Monkfruit sugar": "Đường la hán quả", "The category barely existed in Vietnam. We built it.": "Ngành hàng này gần như chưa tồn tại ở Việt Nam. Chúng tôi đã tạo ra nó.", "CT registered the product, secured major retail chain listings, and funded consumer education around sugar reduction — creating demand shelf by shelf.": "CT đăng ký sản phẩm, đưa vào các chuỗi bán lẻ lớn và đầu tư giáo dục người tiêu dùng về giảm đường — tạo nhu cầu trên từng quầy kệ.", "Top-5 best-seller": "Top-5 bán chạy", "Built & marketed by CT": "Do CT gây dựng & tiếp thị", "Pharmaceuticals · Hospital channel": "Dược phẩm · Kênh bệnh viện", "Gastroenterology & cardiovascular": "Tiêu hóa & tim mạch", "From registered in Vietnam to prescribed in Vietnam.": "Từ được cấp phép tại Việt Nam đến được kê đơn tại Việt Nam.", "Through 200+ hospitals, CT has grown partner medications into category best-sellers — sustained across tender cycles and formulary reviews.": "Qua hơn 200 bệnh viện, CT đã đưa thuốc của đối tác thành sản phẩm bán chạy nhất ngành hàng — duy trì qua các chu kỳ đấu thầu và rà soát danh mục thuốc.", "Trusted partners": "Đối tác tin cậy", "At the center of a world-class supply chain": "Ở trung tâm của một chuỗi cung ứng đẳng cấp thế giới", "We source from premier European and Korean manufacturers and connect into Asia's leading distribution networks — the same infrastructure we put to work behind your brand.": "Chúng tôi nhập nguồn từ các nhà sản xuất hàng đầu châu Âu và Hàn Quốc, đồng thời kết nối với những mạng lưới phân phối lớn nhất châu Á — chính hạ tầng mà chúng tôi dành cho thương hiệu của bạn.", "Manufacturing partners": "Đối tác sản xuất", "Distribution partners": "Đối tác phân phối", "Germany · CDMO": "Đức · CDMO", "France · CDMO": "Pháp · CDMO", "Korea · Pharmaceuticals": "Hàn Quốc · Dược phẩm", "Korea · Supplements": "Hàn Quốc · Thực phẩm chức năng", "Singapore · Distribution": "Singapore · Phân phối", "Vietnam · Distribution": "Việt Nam · Phân phối", "Product portfolio": "Danh mục sản phẩm", "These two are part of a portfolio of": "Hai sản phẩm này thuộc danh mục gồm", "sixty": "sáu mươi", "Medicine and functional food — cardiovascular, gastroenterology, diabetes, immunity, weight management, and more. Explore everything we register, distribute, and market in Vietnam.": "Dược phẩm và thực phẩm chức năng — tim mạch, tiêu hóa, tiểu đường, miễn dịch, kiểm soát cân nặng và hơn thế nữa. Khám phá mọi sản phẩm chúng tôi đăng ký, phân phối và tiếp thị tại Việt Nam.", "Explore the portfolio": "Khám phá danh mục", "How we work": "Cách chúng tôi làm việc", "One partner, from registration to reorder": "Một đối tác duy nhất, từ đăng ký đến tái đặt hàng", "You": "Bạn", "bring the right product.": "mang đến sản phẩm phù hợp.", "We do the rest.": "Chúng tôi lo phần còn lại.", "Evaluate": "Đánh giá", "Product-market fit, pricing, and channel strategy — assessed together.": "Đánh giá cùng nhau về mức độ phù hợp thị trường, giá và chiến lược kênh.", "Register": "Đăng ký", "Dossier, legal, labeling, licensing — owned end to end by CT.": "Hồ sơ, pháp lý, nhãn mác, cấp phép — CT đảm nhận trọn vẹn.", "Launch": "Ra mắt", "A committed first purchase order, import, and launch across channels.": "Đơn đặt hàng đầu tiên có cam kết, nhập khẩu và ra mắt trên các kênh.", "Distribute & market": "Phân phối & tiếp thị", "Hospitals, pharmacies, retail, online — with marketing that drives sell-out.": "Bệnh viện, nhà thuốc, bán lẻ, trực tuyến — cùng hoạt động tiếp thị thúc đẩy tiêu thụ.", "Grow": "Tăng trưởng", "Transparent reporting, reorders, and multi-year brand development.": "Báo cáo minh bạch, tái đặt hàng và phát triển thương hiệu nhiều năm.", "Exclusivity, met with real commitment": "Độc quyền, đi cùng cam kết thực sự", "For selected and exclusive products, we don't just distribute — we take commercial ownership, the way we'd run our own brand.": "Với các sản phẩm chọn lọc và độc quyền, chúng tôi không chỉ phân phối — chúng tôi nhận trách nhiệm thương mại như với chính thương hiệu của mình.", "Committed purchase volume": "Cam kết sản lượng mua", "Where the deal structure works, CT commits to purchase volume up front — not a consignment arrangement, a real order.": "Khi cấu trúc hợp tác phù hợp, CT cam kết sản lượng mua ngay từ đầu — không phải ký gửi, mà là đơn hàng thực sự.", "Brand-building investment": "Đầu tư xây dựng thương hiệu", "Marketing, education, and channel investment for the products we take on — funded by CT, not billed back to the partner.": "CT đầu tư tiếp thị, giáo dục thị trường và phát triển kênh cho các sản phẩm nhận về — do CT chi trả, không tính lại cho đối tác.", "Long-term category ownership": "Làm chủ ngành hàng dài hạn", "Multi-year plans built around category leadership, not a single purchase order and a wait-and-see approach.": "Kế hoạch nhiều năm hướng tới vị trí dẫn đầu ngành hàng, không phải một đơn hàng rồi chờ đợi.", "Good fit for CT": "Phù hợp với CT", "Healthcare or functional food products with real potential, still building a Vietnam presence": "Sản phẩm dược phẩm hoặc thực phẩm chức năng có tiềm năng thực sự, đang xây dựng chỗ đứng tại Việt Nam", "Brands that want a partner to take commercial ownership, not just warehouse and ship": "Thương hiệu muốn một đối tác nhận trách nhiệm thương mại, không chỉ lưu kho và giao hàng", "ODM/OEM factories seeking a committed, high-volume long-term customer": "Nhà máy ODM/OEM tìm kiếm khách hàng dài hạn, sản lượng lớn và có cam kết", "Better served elsewhere": "Phù hợp hơn với nơi khác", "Brands with proven demand in Vietnam wanting structured logistics optimization at scale": "Thương hiệu đã có nhu cầu ổn định tại Việt Nam, cần tối ưu logistics quy mô lớn", "Products needing pure fulfillment with no regulatory or brand-building involvement": "Sản phẩm chỉ cần giao vận thuần túy, không cần pháp lý hay xây dựng thương hiệu", "Discuss Vietnam market entry": "Trao đổi về gia nhập thị trường Việt Nam", "Full name": "Họ và tên", "Company": "Công ty", "I am a": "Tôi là", "Brand owner": "Chủ thương hiệu", "ODM / OEM factory": "Nhà máy ODM / OEM", "Other": "Khác", "Tell us about your product": "Giới thiệu về sản phẩm của bạn", "Submit inquiry": "Gửi yêu cầu", "Thanks — this is a mockup form, no data is sent. In production this routes to the export team within one business day.": "Cảm ơn — đây là biểu mẫu mẫu thử, không có dữ liệu nào được gửi đi. Ở phiên bản chính thức, yêu cầu sẽ được chuyển đến bộ phận xuất khẩu trong vòng một ngày làm việc.", "For brand owners": "Dành cho chủ thương hiệu", "Market entry & distribution": "Gia nhập thị trường & phân phối", "Registration, import, distribution, and marketing for healthcare and functional food brands entering Vietnam.": "Đăng ký, nhập khẩu, phân phối và tiếp thị cho các thương hiệu dược phẩm và thực phẩm chức năng gia nhập Việt Nam.", "For ODM / OEM factories": "Dành cho nhà máy ODM / OEM", "Long-term purchasing partnership": "Quan hệ mua hàng dài hạn", "Committed, high-volume purchasing for factories seeking a reliable Vietnam customer.": "Cam kết mua hàng sản lượng lớn cho các nhà máy tìm kiếm khách hàng Việt Nam đáng tin cậy.", "Head office": "Trụ sở chính", "Privacy Policy": "Chính sách bảo mật", "Legal Notice": "Thông báo pháp lý", "Business registration 0313949886 · Operating since 2016 · Licensed pharmaceutical distributor · © 2026 CT Pharma": "Giấy phép kinh doanh 0313949886 · Hoạt động từ 2016 · Nhà phân phối dược phẩm được cấp phép · © 2026 CT Pharma", "Portfolio · Placeholder mockup": "Danh mục · Bản dựng mẫu", "products.": "sản phẩm.", "category best-sellers.": "nhóm bán chạy nhất.", "Every product here is distributed by CT Pharma across Vietnam. For a select few — the category leaders below among them — we handle the": "Mọi sản phẩm ở đây đều được CT Pharma phân phối trên toàn Việt Nam. Với một số ít được chọn — trong đó có các sản phẩm dẫn đầu ngành hàng bên dưới — chúng tôi đảm nhận", "full journey: registration, marketing, and distribution": "toàn bộ hành trình: đăng ký, tiếp thị và phân phối", ", and build the brand as our own. The same capability we'd put behind yours.": ", và xây dựng thương hiệu như của chính mình. Chính năng lực đó, chúng tôi sẵn sàng dành cho thương hiệu của bạn.", "products in active distribution": "sản phẩm đang phân phối", "category best-sellers in Vietnam": "nhóm bán chạy nhất tại Việt Nam", "hospitals prescribing our portfolio": "bệnh viện kê đơn sản phẩm của chúng tôi", "pharmacies stocking our brands": "nhà thuốc phân phối thương hiệu của chúng tôi", "Category leaders": "Sản phẩm dẫn đầu ngành hàng", "The five we took to the top": "Năm sản phẩm chúng tôi đưa lên dẫn đầu", "Each of these entered Vietnam as an unknown — and became a best-seller in its category under CT Pharma's registration, channel, and brand-building work.": "Mỗi sản phẩm bước vào Việt Nam khi còn xa lạ — và trở thành sản phẩm bán chạy nhất ngành hàng nhờ công tác đăng ký, kênh phân phối và xây dựng thương hiệu của CT Pharma.", "All": "Tất cả", "Medicine": "Dược phẩm", "All functions": "Tất cả nhóm", "Live catalogue — products and categories on this page are managed through the CT Pharma admin panel.": "Danh mục trực tiếp — sản phẩm và nhóm hàng trên trang này được quản lý qua trang quản trị CT Pharma.", "Your brand could be": "Thương hiệu của bạn có thể xuất hiện", "on this shelf.": "trên kệ này.", "We add a small number of products each year — chosen for potential, backed with committed purchasing and real brand-building.": "Mỗi năm chúng tôi bổ sung một số ít sản phẩm — được chọn vì tiềm năng, đi cùng cam kết mua hàng và xây dựng thương hiệu thực sự.", "CLOSE ✕": "ĐÓNG ✕", "Pharmacy & patient information · VI-first zone": "Thông tin nhà thuốc & bệnh nhân · Khu vực tiếng Việt", "Registration": "Số đăng ký", "Form": "Dạng bào chế", "Indication": "Chỉ định", "Available at": "Có mặt tại", "Partner story · EN zone": "Câu chuyện đối tác · Khu vực tiếng Anh", "See how we build brands": "Xem cách chúng tôi xây dựng thương hiệu", "(placeholder)": "(dữ liệu mẫu)", "Product detail template — one page, two audiences: consumer/pharmacist above, brand-owner proof below": "Mẫu trang chi tiết sản phẩm — một trang, hai đối tượng: người tiêu dùng/dược sĩ ở trên, minh chứng cho chủ thương hiệu ở dưới", "Best-seller": "Bán chạy nhất", "CT-built": "CT gây dựng", "Exclusive": "Độc quyền", "Distributed product": "Sản phẩm phân phối", "Category best-seller — edit this proof line in the admin.": "Sản phẩm bán chạy nhất ngành hàng — chỉnh sửa dòng minh chứng này trong trang quản trị.", "Cardiovascular & vascular": "Tim mạch & mạch máu", "Medicine · Cardiovascular & vascular": "Dược phẩm · Tim mạch & mạch máu", "Gastroenterology": "Tiêu hóa", "Medicine · Gastroenterology": "Dược phẩm · Tiêu hóa", "Diabetes": "Tiểu đường", "Medicine · Diabetes": "Dược phẩm · Tiểu đường", "Respiratory": "Hô hấp", "Medicine · Respiratory": "Dược phẩm · Hô hấp", "Pain & inflammation": "Giảm đau & kháng viêm", "Medicine · Pain & inflammation": "Dược phẩm · Giảm đau & kháng viêm", "Neurology": "Thần kinh", "Medicine · Neurology": "Dược phẩm · Thần kinh", "Dermatology & topical": "Da liễu & dùng ngoài", "Medicine · Dermatology & topical": "Dược phẩm · Da liễu & dùng ngoài", "Men's health": "Sức khỏe nam giới", "Medicine · Men's health": "Dược phẩm · Sức khỏe nam giới", "Antiviral": "Kháng virus", "Medicine · Antiviral": "Dược phẩm · Kháng virus", "Endocrine": "Nội tiết", "Medicine · Endocrine": "Dược phẩm · Nội tiết", "Bone & mineral": "Xương & khoáng chất", "Functional food · Bone & mineral": "Thực phẩm chức năng · Xương & khoáng chất", "Blood & maternal health": "Huyết học & sức khỏe bà mẹ", "Functional food · Blood & maternal health": "Thực phẩm chức năng · Huyết học & sức khỏe bà mẹ"};
+  var CUR = 'en';
+  function tr(orig){
+    var key = orig.trim();
+    if(!key) return orig;
+    var vi = DICT[key];
+    if(vi !== undefined) return orig.replace(key, vi);
+    var m;
+    if((m = key.match(/^Showing (\d+) of (\d+) products$/))) return orig.replace(key, 'Hiển thị ' + m[1] + ' trên ' + m[2] + ' sản phẩm');
+    if((m = key.match(/^(\d+) products?$/))) return orig.replace(key, m[1] + ' sản phẩm');
+    return orig;
+  }
+  function nodes(root){
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), out = [], n;
+    while((n = w.nextNode())){
+      var t = n.parentNode && n.parentNode.nodeName;
+      if(t === 'SCRIPT' || t === 'STYLE') continue;
+      out.push(n);
+    }
+    return out;
+  }
+  function apply(n){
+    if(n.__i18n === undefined) n.__i18n = n.nodeValue;
+    var el = n.parentElement;
+    if(el && el.dataset && el.dataset.vi){
+      n.nodeValue = (CUR === 'vi') ? el.dataset.vi : n.__i18n;
+      return;
+    }
+    n.nodeValue = (CUR === 'vi') ? tr(n.__i18n) : n.__i18n;
+  }
+  var TITLES = {
+    en: {home:'CT Pharma \u2014 Vietnam Market Entry & Distribution', port:'CT Pharma \u2014 Product Portfolio'},
+    vi: {home:'CT Pharma \u2014 Gia nh\u1eadp th\u1ecb tr\u01b0\u1eddng & Ph\u00e2n ph\u1ed1i t\u1ea1i Vi\u1ec7t Nam', port:'CT Pharma \u2014 Danh m\u1ee5c s\u1ea3n ph\u1ea9m'}
+  };
+  function syncTitle(){
+    var key = location.hash.indexOf('#/portfolio') === 0 ? 'port' : 'home';
+    document.title = TITLES[CUR][key];
+  }
+  window.addEventListener('hashchange', function(){ setTimeout(syncTitle, 0); });
+  function setLang(lang){
+    CUR = (lang === 'vi') ? 'vi' : 'en';
+    document.documentElement.lang = CUR;
+    try { localStorage.setItem('ctp-lang', CUR); } catch(e){}
+    nodes(document.body).forEach(apply);
+    document.querySelectorAll('[data-lang]').forEach(function(a){
+      if(a.getAttribute('data-lang') === CUR) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+    syncTitle();
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('[data-lang]');
+    if(!a) return;
+    e.preventDefault();
+    setLang(a.getAttribute('data-lang'));
+  });
+  var portRoot = document.getElementById('pg-port');
+  if(portRoot && 'MutationObserver' in window){
+    new MutationObserver(function(muts){
+      if(CUR !== 'vi') return;
+      muts.forEach(function(mu){
+        (mu.addedNodes || []).forEach(function(nd){
+          if(nd.nodeType === 3) apply(nd);
+          else if(nd.nodeType === 1) nodes(nd).forEach(apply);
+        });
+      });
+    }).observe(portRoot, { childList: true, subtree: true });
+  }
+  var saved = 'en';
+  try { saved = localStorage.getItem('ctp-lang') || 'en'; } catch(e){}
+  setLang(saved);
+})();
+</script>
+<!-- I18N:END -->
+
 </body>
 </html>

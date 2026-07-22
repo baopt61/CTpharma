@@ -15,6 +15,7 @@ const PUBLIC_DIR = path.join(ROOT, 'public');
 const configPath = path.join(ROOT, 'config.json');
 const CONFIG = fs.existsSync(configPath) ? JSON.parse(fs.readFileSync(configPath, 'utf8')) : {};
 const ADMIN_PASSCODE = process.env.ADMIN_PASSCODE || CONFIG.adminPasscode || '';
+const ADMIN_USER = process.env.ADMIN_USER || CONFIG.adminUser || 'admin';
 const PORT = process.env.PORT || CONFIG.port || 8937;
 
 if (!ADMIN_PASSCODE) {
@@ -87,8 +88,14 @@ const server = http.createServer(async (req, res) => {
     /* ---------- API ---------- */
     if (p === '/api/login' && req.method === 'POST') {
       const body = JSON.parse((await readBody(req, 10_000)).toString() || '{}');
-      const ok = Boolean(ADMIN_PASSCODE) && body.passcode === ADMIN_PASSCODE;
-      return send(res, ok ? 200 : 401, { ok });
+      const userOk = String(body.user || '').trim().toLowerCase() === ADMIN_USER.toLowerCase();
+      const passOk = Boolean(ADMIN_PASSCODE) && body.passcode === ADMIN_PASSCODE;
+      return send(res, (userOk && passOk) ? 200 : 401, { ok: userOk && passOk });
+    }
+
+    // resume an existing session using the stored passcode header (username already verified at login)
+    if (p === '/api/verify' && req.method === 'POST') {
+      return send(res, authed(req) ? 200 : 401, { ok: authed(req) });
     }
 
     if (p === '/api/products' && req.method === 'GET') {
@@ -175,6 +182,13 @@ const server = http.createServer(async (req, res) => {
       if (!f.startsWith(UPLOAD_DIR) || !fs.existsSync(f) || !fs.statSync(f).isFile()) return send(res, 404, 'not found', 'text/plain');
       const buf = fs.readFileSync(f);
       res.writeHead(200, { 'Content-Type': MIME[path.extname(f)] || 'application/octet-stream', 'Content-Length': buf.length, 'Cache-Control': 'public, max-age=3600' });
+      return res.end(buf);
+    }
+
+    // clean admin URL: /admin (and /admin/) -> login + dashboard page
+    if (p === '/admin' || p === '/admin/') {
+      const buf = fs.readFileSync(path.join(PUBLIC_DIR, 'admin.html'));
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': buf.length, 'Cache-Control': 'no-store' });
       return res.end(buf);
     }
 

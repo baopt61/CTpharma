@@ -1,4 +1,5 @@
 {
   "port": 8937,
+  "adminUser": "admin",
   "adminPasscode": ""
 }

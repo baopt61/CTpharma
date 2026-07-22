@@ -122,14 +122,27 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .btn-danger:hover{border-color:var(--amber-deep);background:rgba(200,31,56,.05)}
 .btn-sm{padding:.35rem .8rem;font-size:.78rem}
 
-/* ---------- gate ---------- */
-.gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-.gate-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:2.4rem 2.2rem;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(14,18,50,.10)}
-.gate-card h1{color:var(--ink);font-size:1.3rem;font-weight:600;margin:.9rem 0 .35rem}
-.gate-card p{font-size:.88rem;color:var(--mute);margin-bottom:1.4rem}
-.gate-card .mono{color:var(--amber-deep)}
-.gate-err{display:none;color:var(--amber-deep);font-size:.82rem;margin-top:.8rem}
+/* ---------- gate / login page ---------- */
+.gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:radial-gradient(1200px 700px at 50% -10%, #E9EDFA 0%, var(--mist) 55%)}
+.gate-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:2.5rem 2.3rem 2.2rem;max-width:410px;width:100%;box-shadow:0 24px 70px rgba(14,18,50,.14);display:flex;flex-direction:column}
+.gate-brand{display:flex;align-items:center;gap:.6rem;margin-bottom:1.5rem}
+.gate-brand .logomark{width:30px;height:30px}
+.gate-word{font-size:1.15rem;font-weight:600;letter-spacing:.02em;color:var(--teal)}
+.gate-word b{color:#E8232B;font-weight:700}
+.gate-eyebrow{color:var(--amber-deep)}
+.gate-card h1{color:var(--ink);font-size:1.5rem;font-weight:600;margin:.7rem 0 .35rem}
+.gate-card p{font-size:.9rem;color:var(--mute);margin-bottom:1.6rem;line-height:1.5}
+.pass-wrap{position:relative}
+.pass-wrap input{padding-right:4rem}
+.pass-toggle{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--teal);font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;padding:.3rem .5rem}
+.pass-toggle:hover{color:var(--teal-deep)}
+.gate-err{display:none;color:var(--amber-deep);font-size:.82rem;margin-top:.9rem;background:rgba(200,31,56,.06);border:1px solid #E3B8C0;border-radius:8px;padding:.55rem .8rem}
 .gate-err.show{display:block}
+.gate-submit{justify-content:center;width:100%;margin-top:1.5rem;padding:.8rem}
+.gate-submit[disabled]{opacity:.6;cursor:default}
+.gate-back{text-align:center;margin-top:1.2rem;font-size:.82rem;color:var(--mute);text-decoration:none}
+.gate-back:hover{color:var(--teal)}
 
 label{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:0 0 .35rem}
 input[type=text],input[type=password],select,textarea{width:100%;background:#fff;border:1px solid #C6CCE4;border-radius:8px;color:var(--ink);font-family:var(--sans);font-size:.92rem;padding:.6rem .8rem}
@@ -214,18 +227,25 @@ td.actions{text-align:right;white-space:nowrap}
 
 <!-- PASSCODE GATE -->
 <div class="gate" id="gate">
-  <div class="gate-card">
-    <span class="mono">CT Pharma · Internal</span>
-    <h1>Portfolio Admin</h1>
-    <p>Enter the admin passcode to manage the product catalogue.</p>
-    <label for="pass">Passcode</label>
-    <input type="password" id="pass" autocomplete="current-password">
-    <div class="gate-err" id="gate-err">That passcode isn't right — try again.</div>
-    <div style="margin-top:1.2rem;display:flex;gap:.7rem;align-items:center">
-      <button class="btn btn-solid" id="login">Unlock</button>
-      <a class="viewsite" href="/" style="font-size:.82rem">← Back to site</a>
+  <form class="gate-card" id="login-form" autocomplete="on">
+    <div class="gate-brand">
+      <svg class="logomark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="12" width="28" height="8" rx="4" fill="#FDFDFE" stroke="#C9CFE2" stroke-width=".6"/><path d="M16 12H6a4 4 0 0 0-4 4 4 4 0 0 0 4 4h10z" fill="#2461AC"/><rect x="12" y="2" width="8" height="28" rx="4" fill="#FDFDFE" stroke="#C9CFE2" stroke-width=".6"/><path d="M12 16V6a4 4 0 0 1 8 0v10z" fill="#E8232B"/></svg>
+      <span class="gate-word"><b>CT</b>&thinsp;Pharma</span>
     </div>
-  </div>
+    <span class="mono gate-eyebrow">Portfolio admin · Internal</span>
+    <h1>Sign in</h1>
+    <p>Enter your admin credentials to manage the product portfolio.</p>
+    <label for="user">Username</label>
+    <input type="text" id="user" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="admin">
+    <label for="pass" style="margin-top:1rem">Password</label>
+    <div class="pass-wrap">
+      <input type="password" id="pass" name="password" autocomplete="current-password" placeholder="••••••••">
+      <button type="button" class="pass-toggle" id="pass-toggle" aria-label="Show password">Show</button>
+    </div>
+    <div class="gate-err" id="gate-err">Incorrect username or password. Please try again.</div>
+    <button class="btn btn-solid gate-submit" id="login" type="submit">Sign in<span class="ar" aria-hidden="true"> →</span></button>
+    <a class="viewsite gate-back" href="/">← Back to site</a>
+  </form>
 </div>
 
 <!-- APP -->
@@ -386,26 +406,42 @@ td.actions{text-align:right;white-space:nowrap}
     $('app').classList.add('on');
     load();
   }
-  $('login').addEventListener('click', tryLogin);
-  $('pass').addEventListener('keydown', function(e){ if(e.key==='Enter') tryLogin(); });
+  $('login-form').addEventListener('submit', function(e){ e.preventDefault(); tryLogin(); });
+  $('pass-toggle').addEventListener('click', function(){
+    var f = $('pass'), showing = f.type === 'text';
+    f.type = showing ? 'password' : 'text';
+    this.textContent = showing ? 'Show' : 'Hide';
+    this.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+    f.focus();
+  });
   function tryLogin(){
-    var pc = $('pass').value;
-    fetch('/api/login', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({passcode: pc})})
+    var user = $('user').value.trim(), pc = $('pass').value;
+    var btn = $('login');
+    btn.disabled = true; btn.textContent = 'Signing in…';
+    $('gate-err').classList.remove('show');
+    fetch('/api/login', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({user: user, passcode: pc})})
       .then(function(r){ return r.json(); })
       .then(function(j){
-        if (j.ok) { sessionStorage.setItem(PASS_KEY, pc); $('gate-err').classList.remove('show'); unlock(); }
-        else $('gate-err').classList.add('show');
+        btn.disabled = false; btn.innerHTML = 'Sign in<span class="ar" aria-hidden="true"> →</span>';
+        if (j.ok) { sessionStorage.setItem(PASS_KEY, pc); unlock(); }
+        else { $('gate-err').classList.add('show'); $('pass').value = ''; $('pass').focus(); }
       })
-      .catch(function(){ $('gate-err').classList.add('show'); });
+      .catch(function(){
+        btn.disabled = false; btn.innerHTML = 'Sign in<span class="ar" aria-hidden="true"> →</span>';
+        $('gate-err').textContent = 'Could not reach the server. Please try again.';
+        $('gate-err').classList.add('show');
+      });
   }
   $('logout').addEventListener('click', function(){
     sessionStorage.removeItem(PASS_KEY);
     location.reload();
   });
+  // resume an existing session (passcode already verified this browser session)
   if (pass()) {
-    fetch('/api/login', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({passcode: pass()})})
+    fetch('/api/verify', {method:'POST', headers:{'X-Passcode': pass()}})
       .then(function(r){ return r.json(); })
-      .then(function(j){ if (j.ok) unlock(); else sessionStorage.removeItem(PASS_KEY); });
+      .then(function(j){ if (j.ok) unlock(); else sessionStorage.removeItem(PASS_KEY); })
+      .catch(function(){});
   }
 
   /* ---------- data ---------- */
