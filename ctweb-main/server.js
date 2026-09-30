@@ -77,6 +77,9 @@ function validProduct(p, cats) {
   if (!Array.isArray(p.ch) || !p.ch.every(c => ['Hospital', 'Pharmacy', 'Modern trade'].includes(c))) return 'invalid channels';
   if (!Array.isArray(p.b) || !p.b.every(x => ['bs', 'ct', 'ex'].includes(x))) return 'invalid badges';
   if (p.flag != null && typeof p.flag !== 'string') return 'invalid flag';
+  for (const key of ['pack', 'composition', 'manufacturer', 'supplier', 'country', 'rx', 'compositionNote']) {
+    if (p[key] != null && typeof p[key] !== 'string') return `invalid ${key}`;
+  }
   return null;
 }
 
@@ -114,7 +117,9 @@ const server = http.createServer(async (req, res) => {
       let id = slugify(body.n); let n = 2;
       while (data.products.some(x => x.id === id)) id = slugify(body.n) + '-' + n++;
       const prod = { id, n: body.n.trim(), cat: body.cat, img: body.img || null,
-        b: body.b, ch: body.ch, form: body.form || '', ind: body.ind || '', flag: body.flag || null };
+        b: body.b, ch: body.ch, form: body.form || '', ind: body.ind || '', flag: body.flag || null,
+        pack: body.pack || '', composition: body.composition || '', manufacturer: body.manufacturer || '',
+        supplier: body.supplier || '', country: body.country || '', rx: body.rx || '', compositionNote: body.compositionNote || '' };
       data.products.push(prod);
       saveData(data);
       return send(res, 201, prod);
@@ -136,7 +141,14 @@ const server = http.createServer(async (req, res) => {
       const cur = data.products[idx];
       data.products[idx] = { id: cur.id, n: body.n.trim(), cat: body.cat,
         img: body.img !== undefined ? body.img : cur.img,
-        b: body.b, ch: body.ch, form: body.form || '', ind: body.ind || '', flag: body.flag || null };
+        b: body.b, ch: body.ch, form: body.form || '', ind: body.ind || '', flag: body.flag || null,
+        pack: body.pack !== undefined ? body.pack : (cur.pack || ''),
+        composition: body.composition !== undefined ? body.composition : (cur.composition || ''),
+        manufacturer: body.manufacturer !== undefined ? body.manufacturer : (cur.manufacturer || ''),
+        supplier: body.supplier !== undefined ? body.supplier : (cur.supplier || ''),
+        country: body.country !== undefined ? body.country : (cur.country || ''),
+        rx: body.rx !== undefined ? body.rx : (cur.rx || ''),
+        compositionNote: body.compositionNote !== undefined ? body.compositionNote : (cur.compositionNote || '') };
       saveData(data);
       return send(res, 200, data.products[idx]);
     }

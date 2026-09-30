@@ -23,7 +23,8 @@ the values.
 ## What the admin can do
 
 - **Add / edit / delete products** — name, division (Medicine / Functional food),
-  category, form, indication, channels (Hospital / Pharmacy / Modern trade).
+  category, form, pack size, composition, manufacturer/supplier, country of origin,
+  classification, and channels (Hospital / Pharmacy / Modern trade).
 - **Badges** — Best-seller, CT-built, Exclusive.
 - **Flagship row** — toggle any product into the homepage-portfolio "Category
   leaders" row and write its proof line. (Keep this to ~5 products.)
@@ -58,11 +59,11 @@ putting it on the public internet:
 
 ## Seeded content
 
-The catalogue ships pre-seeded with CT Pharma's 22 real products and pack shots
-(from the 2026-07-07 e-commerce shoot), categorized by therapeutic area.
-Five are marked flagship with placeholder proof lines — edit those in the admin.
-Product indications were transcribed from packaging; review them in the admin
-before publishing.
+The catalogue is seeded with 21 products from the supplied CT Pharma portfolio,
+including product photos, composition, pack size, manufacturer/supplier,
+country of origin, prescription classification, and distribution channels.
+Five products remain selected for the homepage's category-leader row. Myhemo's
+composition is shown as listed in the supplied portfolio.
 
 See `DEPLOY.md` for the hosting handoff, including persistent-storage and
 single-instance requirements.

@@ -324,6 +324,15 @@ td.actions{text-align:right;white-space:nowrap}
       <div><label for="f-form">Form / pack</label><input type="text" id="f-form" placeholder="e.g. Film-coated tablet"></div>
       <div><label for="f-ind">Indication / description</label><input type="text" id="f-ind" placeholder="e.g. Antacid & antiflatulent"></div>
     </div>
+    <div class="frow">
+      <div><label for="f-pack">Pack size</label><input type="text" id="f-pack" placeholder="e.g. Hộp 3 vỉ x 10 viên"></div>
+      <div><label for="f-rx">Classification</label><input type="text" id="f-rx" placeholder="e.g. Thuốc kê đơn"></div>
+    </div>
+    <div class="frow single"><div><label for="f-composition">Composition</label><textarea id="f-composition" placeholder="Composition as shown in the approved product materials"></textarea></div></div>
+    <div class="frow">
+      <div><label for="f-manufacturer">Manufacturer / supplier</label><input type="text" id="f-manufacturer"></div>
+      <div><label for="f-country">Country of origin</label><input type="text" id="f-country"></div>
+    </div>
     <div class="frow single">
       <div>
         <label>Channels</label>
@@ -563,6 +572,11 @@ td.actions{text-align:right;white-space:nowrap}
     fillCatSelect(div, p ? p.cat : undefined);
     $('f-form').value = p ? (p.form||'') : '';
     $('f-ind').value = p ? (p.ind||'') : '';
+    $('f-pack').value = p ? (p.pack||'') : '';
+    $('f-composition').value = p ? (p.composition||'') : '';
+    $('f-manufacturer').value = p ? (p.manufacturer||p.supplier||'') : '';
+    $('f-country').value = p ? (p.country||'') : '';
+    $('f-rx').value = p ? (p.rx||'') : '';
     document.querySelectorAll('.checks input[value]').forEach(function(cb){
       if (['Hospital','Pharmacy','Modern trade'].includes(cb.value)) cb.checked = p ? (p.ch||[]).includes(cb.value) : cb.value==='Pharmacy';
       else cb.checked = p ? (p.b||[]).includes(cb.value) : false;
@@ -608,6 +622,8 @@ td.actions{text-align:right;white-space:nowrap}
 
     var payload = {
       n: name, cat: $('f-cat').value, form: $('f-form').value.trim(), ind: $('f-ind').value.trim(),
+      pack: $('f-pack').value.trim(), composition: $('f-composition').value.trim(),
+      manufacturer: $('f-manufacturer').value.trim(), country: $('f-country').value.trim(), rx: $('f-rx').value.trim(),
       ch: ch, b: b, flag: isFlag ? proof : null
     };
 
